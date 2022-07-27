@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Text, Pressable} from 'react-native'
 import { useDispatch } from 'react-redux';
-import { add } from '../redux/slices/calculate';
+import { add, remove } from '../redux/slices/calculate';
 
 export function Button(props){
     const dispatch = useDispatch()
@@ -22,6 +22,13 @@ export function ButtonLight(props){
     const dispatch = useDispatch()
     return<Pressable style={styles.light} onPress={()=>dispatch(add(props.children))}>
         <Text style={styles.textWhite}>{props.children}</Text>
+    </Pressable>
+}
+
+export function ButtonDel(){
+    const dispatch = useDispatch()
+    return<Pressable style={styles.light} onPress={()=>dispatch(remove())}>
+        <Text style={styles.textWhite}>{'<<'}</Text>
     </Pressable>
 }
 

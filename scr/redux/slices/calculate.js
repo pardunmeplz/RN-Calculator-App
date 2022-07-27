@@ -20,13 +20,18 @@ export const calculateSlice = createSlice({
                 
                 return
             }
-            state.value.push(action.payload)
-            
-            
+            state.value.push(action.payload)  
+        },
+        remove:(state)=>{
+            state.value.pop()
+            if(!state.value.length)
+            {
+                state.value.push('0')
+            }
         }
     }
 })
-export const {add} = calculateSlice.actions
+export const {add, remove} = calculateSlice.actions
 export default calculateSlice.reducer
 
 

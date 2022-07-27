@@ -9,7 +9,7 @@
 import React, { useEffect, useState } from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native'
 import Row from './scr/components/Row';
-import { Button, ButtonAccent, ButtonLight, ButtonLong} from './scr/components/Button';
+import { Button, ButtonAccent, ButtonDel, ButtonLight, ButtonLong} from './scr/components/Button';
 import Display from './scr/components/Display';
 import { useOrientation } from './scr/Orientation';
 import { Provider } from 'react-redux';
@@ -28,7 +28,7 @@ function App() {
       <Row>
               <ButtonLight>(</ButtonLight>
               <ButtonLight>)</ButtonLight>
-              <ButtonLight>{'<<'}</ButtonLight>
+              <ButtonDel/>
               <ButtonAccent>/</ButtonAccent>
       </Row>      
       <Row>
