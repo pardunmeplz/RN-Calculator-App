@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Text, Pressable} from 'react-native'
 import { useDispatch } from 'react-redux';
-import { add, remove } from '../redux/slices/calculate';
+import { add, evaluate, remove } from '../redux/slices/calculate';
 
 export function Button(props){
     const dispatch = useDispatch()
@@ -15,6 +15,13 @@ export function ButtonAccent(props){
     const dispatch = useDispatch()
     return<Pressable style={styles.accent} onPress={()=>dispatch(add(props.children))}>
         <Text style={styles.textWhite}>{props.children}</Text>
+        </Pressable>
+}
+
+export function ButtonEval(){
+    const dispatch = useDispatch()
+    return<Pressable style={styles.accent} onPress={()=>dispatch(evaluate())}>
+        <Text style={styles.textWhite}>=</Text>
         </Pressable>
 }
 

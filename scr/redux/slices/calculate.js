@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import result from '../../Evaluation'
 
 const initialState={value:['0']}
 
@@ -15,7 +16,7 @@ export const calculateSlice = createSlice({
                 state.value[top] = action.payload
                 return
             }
-            if(!isOprator(state.value[top]) && !isOprator(action.payload)){
+            if(!isSpecial(state.value[top]) && !isSpecial(action.payload)){
                 state.value[top]+=action.payload
                 
                 return
@@ -28,14 +29,22 @@ export const calculateSlice = createSlice({
             {
                 state.value.push('0')
             }
+        },
+        evaluate:(state)=>{
+            state.value = [result(state.value)]
         }
     }
 })
-export const {add, remove} = calculateSlice.actions
+export const {add, remove, evaluate} = calculateSlice.actions
 export default calculateSlice.reducer
 
 
 function isOprator(val)
 {
-    return "+-x/()<<=".includes(val)
+    return "+-x/<<=".includes(val)
+}
+
+function isSpecial(val)
+{
+    return "+-x/<<=()".includes(val)
 }

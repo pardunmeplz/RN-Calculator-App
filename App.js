@@ -9,7 +9,7 @@
 import React, { useEffect, useState } from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native'
 import Row from './scr/components/Row';
-import { Button, ButtonAccent, ButtonDel, ButtonLight, ButtonLong} from './scr/components/Button';
+import { Button, ButtonAccent, ButtonDel, ButtonEval, ButtonLight, ButtonLong} from './scr/components/Button';
 import Display from './scr/components/Display';
 import { useOrientation } from './scr/Orientation';
 import { Provider } from 'react-redux';
@@ -52,7 +52,7 @@ function App() {
       <Row>
               <ButtonLong>0</ButtonLong>
               <Button>.</Button>
-              <ButtonAccent>=</ButtonAccent>
+              <ButtonEval/>
       </Row>
       </View>
     </View>
