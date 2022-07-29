@@ -17,8 +17,12 @@ export const calculateSlice = createSlice({
                 return
             }
             if(!isSpecial(state.value[top]) && !isSpecial(action.payload)){
-                state.value[top]+=action.payload
                 
+                if(state.value[top]==0){
+                    state.value[top] = action.payload
+                    return
+                }
+                state.value[top]+=action.payload
                 return
             }
             state.value.push(action.payload)  

@@ -3,47 +3,22 @@ import {View, StyleSheet, Text, Pressable} from 'react-native'
 import { useDispatch } from 'react-redux';
 import { add, evaluate, remove } from '../redux/slices/calculate';
 
-export function Button(props){
+export function Button({children, style = 'plain'}){
     const dispatch = useDispatch()
-    return<Pressable style={styles.plain} onPress={()=>dispatch(add(props.children))}>
-        <Text style={styles.textWhite}>{props.children}</Text>
+    return<Pressable style={styles[style]} onPress={()=>dispatch(action(children))}>
+        <Text style={styles.textWhite}>{children}</Text>
         </Pressable>
     
 }
 
-export function ButtonAccent(props){
-    const dispatch = useDispatch()
-    return<Pressable style={styles.accent} onPress={()=>dispatch(add(props.children))}>
-        <Text style={styles.textWhite}>{props.children}</Text>
-        </Pressable>
-}
-
-export function ButtonEval(){
-    const dispatch = useDispatch()
-    return<Pressable style={styles.accent} onPress={()=>dispatch(evaluate())}>
-        <Text style={styles.textWhite}>=</Text>
-        </Pressable>
-}
-
-export function ButtonLight(props){
-    const dispatch = useDispatch()
-    return<Pressable style={styles.light} onPress={()=>dispatch(add(props.children))}>
-        <Text style={styles.textWhite}>{props.children}</Text>
-    </Pressable>
-}
-
-export function ButtonDel(){
-    const dispatch = useDispatch()
-    return<Pressable style={styles.light} onPress={()=>dispatch(remove())}>
-        <Text style={styles.textWhite}>{'<<'}</Text>
-    </Pressable>
-}
-
-export function ButtonLong(props){
-    const dispatch = useDispatch()
-    return<Pressable style={styles.long} onPress={()=>dispatch(add(props.children))}>
-        <Text style={styles.textWhite}>{props.children}</Text>
-    </Pressable>
+function action(val) // decides what button does based on children
+{
+    switch(val)
+    {
+        case '<<': return remove()
+        case '=' : return evaluate()
+        default  : return add(val)
+    }
 }
 
 const base = {

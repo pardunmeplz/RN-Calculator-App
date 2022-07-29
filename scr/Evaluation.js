@@ -9,8 +9,8 @@ export default function result(arr)
             stack.push(element)
         }
         else{
-            let a = parseFloat(stack.pop())
             let b = parseFloat(stack.pop())
+            let a = parseFloat(stack.pop())
             switch(element){
                 case '+':
                     stack.push(a+b)
@@ -26,7 +26,6 @@ export default function result(arr)
                     break
             }
         }
-
     })
     return stack.pop()
 }
@@ -38,41 +37,53 @@ function toPostfix(arr)
     let stack = []
     let output = []
     arr.forEach(element => {
+        console.log(output)
+        console.log(stack)
         if(!isOprator(element)){
             output.push(element)
             return
         }
+
         if(element == ')')
         {
-            while(stack[stack.length]!=')')
+            const length = stack.length
+            
+            
+            for(let i = 0; i<=length;i++)
             {
+                if(stack[stack.length-1]=='(') break
                 output.push(stack.pop())
             }
             stack.pop()
             return
         }
 
-
         if(greater(element, stack[stack.length-1]))
-        {
+        {  
             stack.push(element)
-            return
-        }
+        }else{
+            const length = stack.length
+            for(let i = 0; i<length;i++)
+            {
+                if(greater(element, stack[stack.length-1])) break
+                output.push(stack.pop())
+            }
+            stack.push(element)
+            
+        }});
+        console.log(stack)
+    stack.reverse()
+    stack.forEach((element)=>output.push(element))
 
-    });
-
-    for(let i = stack.length; i>0;i--)
-    {
-        output.push(stack.pop())
-    }
     console.log(output)
+
     return output
 
 }
 
 function isOprator(val)
 {
-    return "+-x/".includes(val)
+    return "+-x/()".includes(val)
 }
 
 
@@ -83,5 +94,8 @@ function greater(oprA, oprB)
     let A = 0,B = 0
     if(oprA=='+' || oprA == '-') A = 1
     if(oprA=='x' || oprA == '/') A = 2
-    return true 
+    if(oprB=='+' || oprB == '-') B = 1
+    if(oprB=='x' || oprB == '/') B = 2
+    if(oprA=='(') A = 3
+    return A>B
 }
